@@ -13,4 +13,3 @@ Trata-se de uma aplicação web que apresenta uma listagem de pessoas, incluindo
 | Hibernate    | 4.3.8     |
 | PrimeFaces   | 7.0       |
 | JUnit        | 4.13.2    |
-| Flyway       | 7.15.0    |

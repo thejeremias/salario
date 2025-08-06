@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Salário</title>
+	 <h:outputStylesheet>
+        .titulo-centralizado {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            font-family: arial;
+            color: #555555;
+        }
+        .botao-centro {
+            width:100%; 
+            text-align:center;
+        }
+
+        .largura-total {
+            width: 100%;
+        }
+        .coluna-centralizada {
+        	text-align: center;
+        }
+    </h:outputStylesheet>
+</h:head>	
+<h:body>
+	<h2 class="titulo-centralizado">Listagem de Pessoas com Salário Consolidado</h2>
+	<h:form styleClass="largura-total">
+		<p:messages/>
+		<p:dataTable var="psc" value="#{pessoaSalarioConsolidadoMbean.lazyModel}" emptyMessage="Sem registros" paginator="true" lazy="true" rows="5" paginatorPosition="bottom">
+			<p:column headerText="Nome" styleClass="coluna-centralizada">
+				<h:outputText value="#{psc.nomePessoa}"/>	
+			</p:column>
+			<p:column headerText="Cargo" styleClass="coluna-centralizada">
+				<h:outputText value="#{psc.nomeCargo}"/>	
+			</p:column>
+			<p:column headerText="Salário" styleClass="coluna-centralizada">
+				<h:outputText value="#{psc.salario}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>
+			</p:column>
+	    </p:dataTable>
+	    <p:panelGrid columns="1" styleClass="botao-centro">
+	    	<p:commandButton value="Calcular Salários" action="#{pessoaSalarioConsolidadoMbean.calcularSalarios}" update="@form"/>
+	    </p:panelGrid>
+	</h:form>
+</h:body>
+</html>

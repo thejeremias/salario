@@ -3,6 +3,7 @@ package io.github.thejeremias.salario.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import io.github.thejeremias.salario.domain.PersistEntity;
 import io.github.thejeremias.salario.exception.DaoException;
@@ -42,6 +43,21 @@ public class GenericDaoImpl<T extends PersistEntity> implements GenericDao<T> {
 	    	 throw new DaoException("DAO: registro não existe.");
 	     }	
 	     entityManager.remove(entity);
+	}
+
+	@Override
+	public List<T> findAllPaginado(int first, int pageSize) {
+		String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";
+		Query query = entityManager.createQuery(jpql, entityClass);
+		query.setFirstResult(first);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public int countAll() {
+		String jpql = "SELECT count(e) FROM " + entityClass.getSimpleName() + " e";
+		return ((Long) entityManager.createQuery(jpql, Long.class).getSingleResult()).intValue();
 	}
 	
 }

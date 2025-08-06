@@ -8,4 +8,8 @@ public class DaoException extends Exception {
 		super(mensagem);
 	}
 	
+	public DaoException(String mensagem, Throwable cause) {
+		super(mensagem, cause);
+	}
+	
 }
