@@ -32,8 +32,19 @@ public class GenericDaoImpl<T extends PersistEntity> implements GenericDao<T> {
 	}
 
 	@Override
-	public T save(T entity) {
-		return entityManager.merge(entity);
+	public T save(T entity) throws DaoException {
+		try {
+			entityManager.getTransaction().begin();
+			entity = entityManager.merge(entity);
+			entityManager.getTransaction().commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			if (entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().rollback();
+			}
+			throw new DaoException("Erro ao salvar registro", e);
+		}
+		return entity;
 	}
 
 	@Override
@@ -42,7 +53,17 @@ public class GenericDaoImpl<T extends PersistEntity> implements GenericDao<T> {
 	     if (entity == null) {
 	    	 throw new DaoException("DAO: registro não existe.");
 	     }	
-	     entityManager.remove(entity);
+	     try {
+			entityManager.getTransaction().begin();
+			entityManager.remove(entity);
+			entityManager.getTransaction().commit();
+		  } catch(Exception e) {
+				e.printStackTrace();
+				if (entityManager.getTransaction().isActive()) {
+					entityManager.getTransaction().rollback();
+				}
+				throw new DaoException("Erro ao remover registro", e);
+		  }
 	}
 
 	@Override

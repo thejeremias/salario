@@ -8,6 +8,7 @@ import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
+import io.github.thejeremias.salario.dto.FiltroPessoaSalarioConsolidadoDto;
 import io.github.thejeremias.salario.service.PessoaSalarioConsolidadoService;
 
 public class PessoaSalarioConsolidadoPaginator extends LazyDataModel<PessoaSalarioConsolidado> {
@@ -16,14 +17,18 @@ public class PessoaSalarioConsolidadoPaginator extends LazyDataModel<PessoaSalar
 	
 	private PessoaSalarioConsolidadoService pessoaSalarioConsolidadoService;
 	
-	public PessoaSalarioConsolidadoPaginator() {
-		super();
+	private FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto;
+	
+	public PessoaSalarioConsolidadoPaginator(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
 		this.pessoaSalarioConsolidadoService = new PessoaSalarioConsolidadoService();
+		this.filtroPessoaSalarioConsolidadoDto = filtroPessoaSalarioConsolidadoDto;
 	}
 		
 	public List<PessoaSalarioConsolidado> load(int first, int pageSize) {
-		  List<PessoaSalarioConsolidado> pessoas = pessoaSalarioConsolidadoService.findAllPaginado(first, pageSize);
-          setRowCount(pessoaSalarioConsolidadoService.countAll());
+		  filtroPessoaSalarioConsolidadoDto.setPrimeiroRegistro(first);
+		  filtroPessoaSalarioConsolidadoDto.setQuantidadeRegistros(pageSize);
+		  List<PessoaSalarioConsolidado> pessoas = pessoaSalarioConsolidadoService.filterPaginadoProjetado(filtroPessoaSalarioConsolidadoDto);
+          setRowCount(pessoaSalarioConsolidadoService.countWithFilter(filtroPessoaSalarioConsolidadoDto));
           return pessoas;
 	}
 	

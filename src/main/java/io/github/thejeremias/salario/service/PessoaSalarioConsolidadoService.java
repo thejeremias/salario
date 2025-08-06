@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.github.thejeremias.salario.dao.PessoaSalarioConsolidadoDao;
 import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
+import io.github.thejeremias.salario.dto.FiltroPessoaSalarioConsolidadoDto;
 import io.github.thejeremias.salario.exception.DaoException;
 import io.github.thejeremias.salario.exception.NegocioException;
 
@@ -23,6 +24,10 @@ public class PessoaSalarioConsolidadoService {
 			throw new NegocioException("Erro ao salvar o cálculo", e);
 		}
 	}
+	
+	public List<PessoaSalarioConsolidado> findAllPaginadoProjetado(int first, int pageSize) {
+		return pessoaSalarioConsolidadoDao.findAllPaginadoProjetado(first, pageSize);
+	}
 
 	public List<PessoaSalarioConsolidado> findAll() {
 		return pessoaSalarioConsolidadoDao.findAll();
@@ -34,6 +39,14 @@ public class PessoaSalarioConsolidadoService {
 
 	public int countAll() {
 		return pessoaSalarioConsolidadoDao.countAll();
+	}
+	
+	public List<PessoaSalarioConsolidado> filterPaginadoProjetado(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
+		return pessoaSalarioConsolidadoDao.filterPaginadoProjetado(filtroPessoaSalarioConsolidadoDto);
+	}
+	
+	public int countWithFilter(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
+		return pessoaSalarioConsolidadoDao.countWithFilter(filtroPessoaSalarioConsolidadoDto);
 	}
 	
 }

@@ -7,6 +7,10 @@
 <h:head>
 	<title>Salário</title>
 	 <h:outputStylesheet>
+	 	* {
+	 		font-family: arial;
+            color: #555555;
+	 	}
         .titulo-centralizado {
             text-align: center;
             font-size: 24px;
@@ -14,9 +18,11 @@
             font-family: arial;
             color: #555555;
         }
-        .botao-centro {
+        .container-centro {
             width:100%; 
             text-align:center;
+            font-family: arial;
+            color: #555555;
         }
 
         .largura-total {
@@ -31,8 +37,13 @@
 	<h2 class="titulo-centralizado">Listagem de Pessoas com Salário Consolidado</h2>
 	<h:form styleClass="largura-total">
 		<p:messages/>
-		<p:dataTable var="psc" value="#{pessoaSalarioConsolidadoMbean.lazyModel}" emptyMessage="Sem registros" paginator="true" lazy="true" rows="5" paginatorPosition="bottom">
-			<p:column headerText="Nome" styleClass="coluna-centralizada">
+		<h:panelGrid columns="3">
+			<h:outputLabel for="nome-pessoa-filtro" value="Nome" />
+    		<p:inputText id="nome-pessoa-filtro" value="#{pessoaSalarioConsolidadoMbean.filtroPessoaSalarioConsolidadoDto.nome}" />
+    		<p:commandButton value="Consultar" update="tbl" process="@form" />
+		</h:panelGrid>
+		<p:dataTable id="tbl" var="psc" value="#{pessoaSalarioConsolidadoMbean.lazyModel}" emptyMessage="Sem registros" paginator="true" lazy="true" rows="5" paginatorPosition="bottom">
+			<p:column headerText="Nome" styleClass="coluna-centralizada" filterMatchMode="contains">
 				<h:outputText value="#{psc.nomePessoa}"/>	
 			</p:column>
 			<p:column headerText="Cargo" styleClass="coluna-centralizada">
@@ -44,9 +55,13 @@
 				</h:outputText>
 			</p:column>
 	    </p:dataTable>
-	    <p:panelGrid columns="1" styleClass="botao-centro">
-	    	<p:commandButton value="Calcular Salários" action="#{pessoaSalarioConsolidadoMbean.calcularSalarios}" update="@form"/>
-	    </p:panelGrid>
+	    <div class="container-centro">
+ 			<h:outputLabel for="assincronoCheckbox" value="Assíncrono?" />
+   			<h:selectBooleanCheckbox id="assincronoCheckbox" value="#{pessoaSalarioConsolidadoMbean.assincrono}" />
+	    </div>
+	    <div class="container-centro">
+    	    <p:commandButton value="Calcular Salários" action="#{pessoaSalarioConsolidadoMbean.calcularSalarios}" update="@form"/>
+	    </div>
 	</h:form>
 </h:body>
 </html>

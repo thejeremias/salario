@@ -34,11 +34,25 @@ public class PessoaSalarioConsolidado implements PersistEntity {
 
 	public PessoaSalarioConsolidado() {}
 	
+	public PessoaSalarioConsolidado(String nomePessoa, String nomeCargo, Double salario) {
+		this.nomePessoa = nomePessoa;
+		this.nomeCargo = nomeCargo;
+		this.salario = salario;
+	}
+	
 	public PessoaSalarioConsolidado(Long id, String nomePessoa, String nomeCargo, Double salario) {
 		this.id = id;
 		this.nomePessoa = nomePessoa;
 		this.nomeCargo = nomeCargo;
 		this.salario = salario;
+	}
+		
+	public PessoaSalarioConsolidado(Long id, String nomePessoa, String nomeCargo, Double salario, Pessoa pessoa) {
+		this.id = id;
+		this.nomePessoa = nomePessoa;
+		this.nomeCargo = nomeCargo;
+		this.salario = salario;
+		this.pessoa = pessoa;
 	}
 
 	@Override
