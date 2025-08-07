@@ -19,7 +19,7 @@
     		<p:inputText id="nome-pessoa-filtro" value="#{pessoaSalarioConsolidadoMbean.filtroPessoaSalarioConsolidadoDto.nome}" />
     		<p:commandButton value="Consultar" update="tbl" process="@form" />
 		</div>
-		<p:dataTable id="tbl" var="psc" value="#{pessoaSalarioConsolidadoMbean.lazyModel}" emptyMessage="Sem registros" paginator="true" lazy="true" rows="5" paginatorPosition="bottom">
+		<p:dataTable id="tbl" var="psc" value="#{pessoaSalarioConsolidadoMbean.lazyModel}" emptyMessage="Sem registros" paginator="true" lazy="true" rows="10" paginatorPosition="bottom">
 			<p:column headerText="Nome" styleClass="coluna-centralizada" filterMatchMode="contains">
 				<h:outputText value="#{psc.nomePessoa}"/>	
 			</p:column>

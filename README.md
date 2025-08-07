@@ -9,6 +9,8 @@ Esta aplicação segue uma arquitetura em camadas simples. O objetivo é manter 
 
 ![Texto alternativo](./arquitetura.png)
 
+## 🧹 Qualidade
+Neste projeto, utilizei o SonarQube e executei teste de sistema considerando não apenas o caminho feliz, mas também cenários de falha.
 
 
 ## 🛠️ Tecnologias
@@ -39,7 +41,7 @@ salários calculados e exportação em PDF;
 
 ✅ Criar um CRUD de usuário e implementar autenticação via Login e Senha;
 
-✅ Criar testes de unidade.
+✅ Criar testes de unidade (leve uso).
 
 ## 🚀 Instruções para execução em um ambiente local
 
