@@ -36,6 +36,7 @@
 	    </div>
 	    <div class="container-centro">
     	    <p:commandButton value="Calcular Salários" action="#{pessoaSalarioConsolidadoMbean.calcularSalarios}" update="@form"/>
+    	    <p:commandButton value="Gerar Relatório" action="#{pessoaSalarioConsolidadoMbean.gerarRelatorio}" ajax="false"  process="@this" update="@none"/>
 	    </div>
 	</h:form>	
 	<h:form>

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
 import io.github.thejeremias.salario.dto.FiltroPessoaSalarioConsolidadoDto;
+import io.github.thejeremias.salario.dto.LinhaRelatorio;
 import io.github.thejeremias.salario.exception.DaoException;
 
 public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioConsolidado>{
@@ -66,6 +67,21 @@ public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioCon
 		Query query = entityManager.createQuery(jpql.toString());
 		query.setFirstResult(filtroPessoaSalarioConsolidadoDto.getPrimeiroRegistro());
 		query.setMaxResults(filtroPessoaSalarioConsolidadoDto.getQuantidadeRegistros());
+		for (Entry<String, Object> filtro : filtros.entrySet()) {
+			query.setParameter(filtro.getKey(), filtro.getValue());
+		}
+		return query.getResultList();
+	}
+	
+	public List<LinhaRelatorio> filterPaginadoProjetadoRelatorio(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
+		StringBuilder jpql = new StringBuilder("SELECT new io.github.thejeremias.salario.dto.LinhaRelatorio(psc.nomePessoa, psc.nomeCargo, psc.salario) FROM PessoaSalarioConsolidado psc WHERE 1=1");
+		Map<String, Object> filtros = new HashMap<>();
+		if (filtroPessoaSalarioConsolidadoDto.getNome() != null && !filtroPessoaSalarioConsolidadoDto.getNome().trim().isEmpty()) {
+			jpql.append(" AND lower(psc.nomePessoa) like :nome ");
+			filtros.put("nome", "%" + filtroPessoaSalarioConsolidadoDto.getNome().toLowerCase() + "%");
+		}
+		jpql.append(" ORDER BY psc.nomePessoa ");
+		Query query = entityManager.createQuery(jpql.toString());
 		for (Entry<String, Object> filtro : filtros.entrySet()) {
 			query.setParameter(filtro.getKey(), filtro.getValue());
 		}

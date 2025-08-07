@@ -3,6 +3,8 @@ package io.github.thejeremias.salario.controller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.model.LazyDataModel;
 
@@ -57,6 +59,18 @@ public class PessoaSalarioConsolidadoMbean extends AbstractController {
 		ExecutorTarefaAsync.executar(new CalculoSalariosTarefaAsync());
 		adicionarMensagemInfo("Cálculo será iniciado. Assim que ficar pronto, será disponibilizado.");
 		assincrono = false;
+		return "";
+	}
+	
+	public String gerarRelatorio() {
+		try {		
+			pessoaSalarioConsolidadoService.gerarRelatorioPessoasSalariosConsolidados(filtroPessoaSalarioConsolidadoDto, (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+					.getResponse());
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (NegocioException e) {
+			e.printStackTrace();
+			adicionarMensagemErro(e.getMessage());
+		}
 		return "";
 	}
 		
