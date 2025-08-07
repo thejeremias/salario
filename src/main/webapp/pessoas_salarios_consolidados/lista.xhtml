@@ -6,35 +6,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Salário</title>
-	 <h:outputStylesheet>
-	 	* {
-	 		font-family: arial;
-            color: #555555;
-	 	}
-        .titulo-centralizado {
-            text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
-            font-family: arial;
-            color: #555555;
-        }
-        .container-centro {
-            width:100%; 
-            text-align:center;
-            font-family: arial;
-            color: #555555;
-        }
-
-        .largura-total {
-            width: 100%;
-        }
-        .coluna-centralizada {
-        	text-align: center;
-        }
-    </h:outputStylesheet>
+	<link rel="stylesheet" href="../static/global.css" />
 </h:head>	
 <h:body>
-	<h2 class="titulo-centralizado">Listagem de Pessoas com Salário Consolidado</h2>
+	<h2 class="titulo-centralizado">Salário - Listagem de Pessoas com Salário Consolidado</h2>
 	<h:form styleClass="largura-total">
 		<p:messages/>
 		<h:panelGrid columns="3">
@@ -62,6 +37,9 @@
 	    <div class="container-centro">
     	    <p:commandButton value="Calcular Salários" action="#{pessoaSalarioConsolidadoMbean.calcularSalarios}" update="@form"/>
 	    </div>
+	</h:form>	
+	<h:form>
+	    <h:commandLink value="Voltar" action="#{menuMbean.voltar}" />
 	</h:form>
 </h:body>
 </html>

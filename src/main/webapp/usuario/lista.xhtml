@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Salário</title>
+	<link rel="stylesheet" href="../static/global.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+</h:head>	
+<h:body>
+		<h2 class="titulo-centralizado">Salário - Usuário</h2>
+		<h:form styleClass="largura-total">
+			<p:messages/>
+		    <div class="container-flex">
+				<div class="filtros">
+				    <h:outputLabel for="login-filtro" value="Login" />
+			    	<p:inputText id="login-filtro" value="#{usuarioMbean.filtroUsuarioDto.login}" />
+					<h:outputLabel for="nome-pessoa-filtro" value="Nome" />
+			    	<p:inputText id="nome-pessoa-filtro" value="#{usuarioMbean.filtroUsuarioDto.nomePessoa}" />
+			    	<p:commandButton value="Consultar" update="tbl" process="@form" />	
+		    	</div>
+		    	<p:dataTable id="tbl" var="usuario" value="#{usuarioMbean.lazyModel}" paginator="true" lazy="true" rows="5" 
+		    	paginatorPosition="bottom" emptyMessage="Sem registros">
+		    		<p:column headerText="Login" styleClass="coluna-centralizada">
+		    			<h:outputText value="#{usuario.pessoa.usuario}" />
+		    		</p:column>	
+		    		<p:column headerText="Nome" styleClass="coluna-centralizada">
+		    			<h:outputText value="#{usuario.pessoa.nome}" />
+		    		</p:column>	
+		    		<p:column headerText="Ações" styleClass="coluna-centralizada">
+		    			<h:commandLink action="#{usuarioMbean.irParaAlterar}">
+		    				<i class="pi pi-pencil" style="font-size: 1.0em;"></i>
+		    				<f:setPropertyActionListener value="#{usuario.id}" target="#{usuarioMbean.usuario.id}" />
+		    			</h:commandLink>
+		    			<h:commandLink action="#{usuarioMbean.remover}" onclick="return confirm('Realmente deseja remover este registro?');">
+		    				<i class="pi pi-trash" style="font-size: 1.0em; color: red;"></i>
+		    				<f:setPropertyActionListener value="#{usuario.id}" target="#{usuarioMbean.usuario.id}" />
+		    			</h:commandLink>
+		    		</p:column>	
+		    	</p:dataTable>
+		    </div>
+		</h:form>
+	<h:form>
+	    <h:commandLink value="Voltar" action="#{menuMbean.voltar}" />
+	</h:form>
+</h:body>
+</html>

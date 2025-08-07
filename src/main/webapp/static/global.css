@@ -1,0 +1,35 @@
+* {
+	font-family: arial;
+    color: #555555;
+}
+	 	
+.titulo-centralizado {
+	text-align: center;
+	font-size: 24px;
+	margin: 20px 0;
+	font-family: arial;
+	color: #555555;
+}
+        
+.container-centro {
+	width:100%; 
+	text-align:center;
+	font-family: arial;
+	color: #555555;
+}
+
+.container-flex {
+    width: fit-content;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.largura-total {
+	width: 100%;
+}
+
+.coluna-centralizada {
+	text-align: center;
+}

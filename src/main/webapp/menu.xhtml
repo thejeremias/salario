@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Salário</title>
+    <link rel="stylesheet" href="static/global.css" />
+    <h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+</h:head>
+<h:body>
+	<h2 class="titulo-centralizado">Salário - Recursos da Aplicação</h2>
+    <h:form>
+    	<p:messages/>
+        <p:menubar>
+            <p:submenu label="Pessoas com Salário Consolidado" icon="pi pi-wallet">
+                <p:menuitem value="Listar"  icon="pi pi-list" action="#{menuMbean.irParaPessoaSalarioConsolidado}"/>
+            </p:submenu>
+            <p:submenu label="Usuários" icon="pi pi-user">
+                <p:menuitem value="Listar"  icon="pi pi-search" action="#{menuMbean.irParaListarUsuario}"/>
+                <p:menuitem value="Cadastrar"  icon="pi pi-user-plus" action="#{menuMbean.irParaCadastroUsuario}"/>
+            </p:submenu>
+            <p:menuitem value="Fazer logout" action="#{loginMbean.logout}"/>
+        </p:menubar>
+    </h:form>
+</h:body>
+</html>

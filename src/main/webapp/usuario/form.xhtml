@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Salário</title>
+	<link rel="stylesheet" href="../static/global.css" />
+</h:head>	
+<h:body>
+		<h2 class="titulo-centralizado">Salário - Usuário</h2>
+		<h:form styleClass="largura-total">
+			<p:messages/>
+		    <div class="container-flex">		    
+			   <h:panelGroup layout="block" rendered="#{usuarioMbean.cadastrando}">
+			    	<h:outputLabel for="pessoa-select" value="Pessoa" />
+			    	<p:selectOneMenu id="pessoa-select" value="#{usuarioMbean.usuario.pessoa.id}">
+			            <f:selectItems value="#{pessoaMbean.pessoasSemUsuarioCombo}"/>
+			        </p:selectOneMenu>
+			    </h:panelGroup>      
+		        <h:outputLabel for="senha-login" value="Senha" />
+		        <h:inputSecret id="senha-login" value="#{usuarioMbean.usuario.senha}" />
+		        <p:commandButton value="Salvar" action="#{usuarioMbean.salvar}" update="@form"/>
+		    </div>
+		</h:form>
+		<h:form>
+		    <h:commandLink value="Voltar" action="#{menuMbean.voltar}" />
+		</h:form>
+</h:body>
+</html>

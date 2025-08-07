@@ -47,11 +47,22 @@ public class Pessoa implements PersistEntity {
 	@JoinColumn(name = "id_cargo")
 	private Cargo cargo;
 
+	private String senha;
 	
 	public Pessoa() {}
 	
+	public Pessoa(Long id) {
+		this.id = id;
+	}
+	
+	public Pessoa(Long id, String nome, String usuario) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+	}
+	
 	public Pessoa(Long id, String nome, String cidade, String email, String cep, String endereco, String pais,
-			String usuario, String telefone, Date dataNascimento, Cargo cargo) {
+			String usuario, String telefone, Date dataNascimento, Cargo cargo, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.cidade = cidade;
@@ -62,6 +73,7 @@ public class Pessoa implements PersistEntity {
 		this.usuario = usuario;
 		this.dataNascimento = dataNascimento;
 		this.cargo = cargo;
+		this.senha = senha;
 	}
 
 	@Override
@@ -152,6 +164,14 @@ public class Pessoa implements PersistEntity {
 
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 }

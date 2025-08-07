@@ -19,6 +19,7 @@ public abstract class AbstractController implements Serializable {
 	
 	public void adicionarMensagemInfo(String mensagem) {
 		 adicionarMensagem(FacesMessage.SEVERITY_INFO, mensagem, "aviso");
+		 
 	}
 	
 	public void adicionarMensagem(Severity severity, String resumo,  String mensagem) {

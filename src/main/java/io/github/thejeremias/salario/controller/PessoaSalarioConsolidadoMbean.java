@@ -33,6 +33,7 @@ public class PessoaSalarioConsolidadoMbean extends AbstractController {
 		pessoaSalarioConsolidadoService = new PessoaSalarioConsolidadoService();
 		filtroPessoaSalarioConsolidadoDto = new FiltroPessoaSalarioConsolidadoDto();
 		lazyModel = new PessoaSalarioConsolidadoPaginator(filtroPessoaSalarioConsolidadoDto);
+		assincrono = false;
 	}
 
 	public String calcularSalarios() {
@@ -54,7 +55,7 @@ public class PessoaSalarioConsolidadoMbean extends AbstractController {
 	
 	public String calcularSalariosAssincrono() {
 		ExecutorTarefaAsync.executar(new CalculoSalariosTarefaAsync());
-		adicionarMensagemInfo("Cálculo foi iniciado. Assim que ficar pronto, será disponibilizado.");
+		adicionarMensagemInfo("Cálculo será iniciado. Assim que ficar pronto, será disponibilizado.");
 		assincrono = false;
 		return "";
 	}

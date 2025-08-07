@@ -10,6 +10,7 @@
 		<class>io.github.thejeremias.salario.domain.Vencimento</class>
 		<class>io.github.thejeremias.salario.domain.CargoVencimento</class>
 		<class>io.github.thejeremias.salario.domain.PessoaSalarioConsolidado</class>
+		<class>io.github.thejeremias.salario.domain.Usuario</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/salario"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
