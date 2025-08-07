@@ -19,7 +19,7 @@ public class UsuarioDao extends GenericDaoImpl<Usuario> {
 	}
 	
 	public Usuario findByNome(String nome) throws DaoException {
-		String jpql = "SELECT u FROM Usuario u join u.pessoa p WHERE p.usuario = :nome";
+		String jpql = "SELECT new Usuario(u.id, u.senha, p.nome, p.usuario) FROM Usuario u join u.pessoa p WHERE p.usuario = :nome";
 		try {
 			return entityManager.createQuery(jpql, Usuario.class).setParameter("nome", nome).getSingleResult();
 		} catch(NoResultException e) {
@@ -66,6 +66,15 @@ public class UsuarioDao extends GenericDaoImpl<Usuario> {
 			query.setParameter(filtro.getKey(), filtro.getValue());
 		}
 		return ((Long) query.getSingleResult()).intValue();
+	}
+	
+	public Usuario findByIdProjetado(Long id) throws DaoException {
+		String jpql = "SELECT new Usuario(u.id, p.nome, p.id, p.usuario) FROM Usuario u join u.pessoa p WHERE u.id = :idUsuario";
+		try {
+			return entityManager.createQuery(jpql, Usuario.class).setParameter("idUsuario", id).getSingleResult();
+		} catch(NoResultException e) {
+			throw new DaoException(DaoException.REGISTRO_NAO_ENCONTRADO, e);
+		}
 	}
 	
 }

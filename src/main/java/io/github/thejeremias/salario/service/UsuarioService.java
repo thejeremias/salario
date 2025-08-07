@@ -23,9 +23,10 @@ public class UsuarioService {
 	public void autenticar(LoginDto loginDto, HttpSession session) throws NegocioException {
 		try {
 			Usuario usuarioBd = usuarioDao.findByNome(loginDto.getUsuario());
-			if (usuarioBd == null || !PasswordUtil.checkPassword(loginDto.getSenha(), usuarioBd.getSenha())) {
+			if (!PasswordUtil.checkPassword(loginDto.getSenha(), usuarioBd.getSenha())) {
 				throw new NegocioException("Credencial inválida.");
 			}
+			usuarioBd.setSenha(null);
 			session.setAttribute("usuario", usuarioBd);
 		} catch(DaoException e) {
 			if (e.isRegistroNaoEncontrado()) {
@@ -65,6 +66,18 @@ public class UsuarioService {
 	
 	public Usuario findById(Long id) {
 		return usuarioDao.findById(id);
+	}
+	
+	public Usuario findByIdProjetado(Long id) throws NegocioException {
+		try {
+			return usuarioDao.findByIdProjetado(id);
+		} catch (DaoException e) {
+			e.printStackTrace();
+			if (e.isRegistroNaoEncontrado()) {
+				throw new NegocioException("Usuário não encontrado.", e);
+			}
+			throw new NegocioException("Erro ao buscar usuário.", e);
+		}
 	}
 
 }

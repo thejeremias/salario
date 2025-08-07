@@ -2,6 +2,9 @@ package io.github.thejeremias.salario.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ *  Classe utilitária para criptografia de senha (segurança)
+ */
 public class PasswordUtil {
 	
 	private PasswordUtil() {

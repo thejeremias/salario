@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -19,9 +20,13 @@
 			    	<p:selectOneMenu id="pessoa-select" value="#{usuarioMbean.usuario.pessoa.id}">
 			            <f:selectItems value="#{pessoaMbean.pessoasSemUsuarioCombo}"/>
 			        </p:selectOneMenu>
-			    </h:panelGroup>      
+			    </h:panelGroup>   
+			      <h:panelGroup layout="block" rendered="#{!usuarioMbean.cadastrando}">
+			    	<h:outputLabel for="nome-readonly" value="Pessoa" />
+			    	<h:outputText id="nome-readonly" value="#{usuarioMbean.usuario.pessoa.nome}"/>
+			    </h:panelGroup>    
 		        <h:outputLabel for="senha-login" value="Senha" />
-		        <h:inputSecret id="senha-login" value="#{usuarioMbean.usuario.senha}" />
+		         <p:password id="senha-login" value="#{usuarioMbean.usuario.senha}" />
 		        <p:commandButton value="Salvar" action="#{usuarioMbean.salvar}" update="@form"/>
 		    </div>
 		</h:form>

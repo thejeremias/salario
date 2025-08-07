@@ -31,10 +31,21 @@ public class Usuario implements PersistEntity {
     public Usuario() {
     	pessoa = new Pessoa(0L);
     }
-     
+    
     public Usuario(Long id, String nomePessoa, String usuario) {
     	this.id = id;
     	pessoa = new Pessoa(0L, nomePessoa, usuario);
+    }
+     
+    public Usuario(Long id, String senha, String nomePessoa, String usuario) {
+    	this.id = id;
+    	this.senha = senha;
+    	pessoa = new Pessoa(0L, nomePessoa, usuario);
+    }
+    
+    public Usuario(Long id, String nomePessoa, Long idPessoa, String usuario) {
+    	this.id = id;
+    	pessoa = new Pessoa(idPessoa, nomePessoa, usuario);
     }
      
     public Usuario(Long id, String senha, Pessoa pessoa) {

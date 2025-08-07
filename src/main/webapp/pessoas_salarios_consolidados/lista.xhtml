@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -10,14 +11,14 @@
 	<link rel="stylesheet" href="../static/global.css" />
 </h:head>	
 <h:body>
-	<h2 class="titulo-centralizado">Salário - Listagem de Pessoas com Salário Consolidado</h2>
+	<h2 class="titulo-centralizado">Salário - Listagem de Pessoas com Salários Consolidados</h2>
 	<h:form styleClass="largura-total">
 		<p:messages/>
-		<h:panelGrid columns="3">
+		<div class="container-flex">
 			<h:outputLabel for="nome-pessoa-filtro" value="Nome" />
     		<p:inputText id="nome-pessoa-filtro" value="#{pessoaSalarioConsolidadoMbean.filtroPessoaSalarioConsolidadoDto.nome}" />
     		<p:commandButton value="Consultar" update="tbl" process="@form" />
-		</h:panelGrid>
+		</div>
 		<p:dataTable id="tbl" var="psc" value="#{pessoaSalarioConsolidadoMbean.lazyModel}" emptyMessage="Sem registros" paginator="true" lazy="true" rows="5" paginatorPosition="bottom">
 			<p:column headerText="Nome" styleClass="coluna-centralizada" filterMatchMode="contains">
 				<h:outputText value="#{psc.nomePessoa}"/>	
@@ -32,7 +33,7 @@
 			</p:column>
 	    </p:dataTable>
 	    <div class="container-centro">
- 			<h:outputLabel for="assincronoCheckbox" value="Assíncrono?" />
+ 			<h:outputLabel for="assincronoCheckbox" value="Processamento assíncrono de cálculo?" />
    			<h:selectBooleanCheckbox id="assincronoCheckbox" value="#{pessoaSalarioConsolidadoMbean.assincrono}" />
 	    </div>
 	    <div class="container-centro">

@@ -77,7 +77,7 @@ public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioCon
 	
 	@SuppressWarnings("unchecked")
 	public List<LinhaRelatorioDto> filterPaginadoProjetadoRelatorio(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
-		StringBuilder jpql = new StringBuilder("SELECT new io.github.thejeremias.salario.dto.LinhaRelatorio(psc.nomePessoa, psc.nomeCargo, psc.salario) FROM PessoaSalarioConsolidado psc WHERE 1=1");
+		StringBuilder jpql = new StringBuilder("SELECT new io.github.thejeremias.salario.dto.LinhaRelatorioDto(psc.nomePessoa, psc.nomeCargo, psc.salario) FROM PessoaSalarioConsolidado psc WHERE 1=1");
 		Map<String, Object> filtros = new HashMap<>();
 		if (filtroPessoaSalarioConsolidadoDto.getNome() != null && !filtroPessoaSalarioConsolidadoDto.getNome().trim().isEmpty()) {
 			jpql.append(" AND lower(psc.nomePessoa) like :nome ");

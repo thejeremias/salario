@@ -12,6 +12,8 @@ import io.github.thejeremias.salario.service.UsuarioService;
 @ManagedBean
 @ViewScoped
 public class LoginMbean extends AbstractController {
+	
+	public static final String FORM_VIEW = "/login";
 
 	private static final long serialVersionUID = 1L;
 	
@@ -28,7 +30,7 @@ public class LoginMbean extends AbstractController {
 	  try {
 		loginDto.validar();
 		usuarioService.autenticar(loginDto, (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false));
-		return "/menu?faces-redirect?true";
+		return forward(MenuMbean.MENU_VIEW);
 	  } catch(IllegalArgumentException | NegocioException e) {
 		  e.printStackTrace();
 		  adicionarMensagemErro(e.getMessage());
@@ -38,7 +40,7 @@ public class LoginMbean extends AbstractController {
 	
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/login?faces-redirect?true";
+		return forward(FORM_VIEW);
 	}
 
 	public LoginDto getLoginDto() {

@@ -1,10 +1,8 @@
 package io.github.thejeremias.salario.service;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 
 import io.github.thejeremias.salario.dao.PessoaSalarioConsolidadoDao;
 import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
@@ -13,6 +11,7 @@ import io.github.thejeremias.salario.exception.DaoException;
 import io.github.thejeremias.salario.exception.NegocioException;
 import io.github.thejeremias.salario.util.JasperUtil;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 public class PessoaSalarioConsolidadoService {
 	
@@ -31,10 +30,10 @@ public class PessoaSalarioConsolidadoService {
 		}
 	}
 	
-	public void gerarRelatorioPessoasSalariosConsolidados(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto, HttpServletResponse httpServletResponse) throws NegocioException {	
+	public JasperPrint gerarRelatorioPessoasSalariosConsolidados(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) throws NegocioException {	
 		try {
-			JasperUtil.gerarRelatorio(pessoaSalarioConsolidadoDao.filterPaginadoProjetadoRelatorio(filtroPessoaSalarioConsolidadoDto), "/relatorios/relatorio_pessoas_salarios_consolidados.jasper", "relatorio_pessoas_salarios_consolidados", new HashMap<>(), httpServletResponse);
-		} catch (JRException | IOException e) {
+			return JasperUtil.gerarRelatorio(pessoaSalarioConsolidadoDao.filterPaginadoProjetadoRelatorio(filtroPessoaSalarioConsolidadoDto), "/relatorios/relatorio_pessoas_salarios_consolidados.jasper", new HashMap<>());
+		} catch (JRException e) {
 			e.printStackTrace();
 			throw new NegocioException("Erro ao gerar relatório", e);
 		}
@@ -64,5 +63,4 @@ public class PessoaSalarioConsolidadoService {
 		return pessoaSalarioConsolidadoDao.countWithFilter(filtroPessoaSalarioConsolidadoDto);
 	}
 	
-
 }

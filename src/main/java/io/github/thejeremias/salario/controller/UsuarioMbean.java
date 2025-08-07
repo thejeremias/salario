@@ -18,6 +18,10 @@ import io.github.thejeremias.salario.service.UsuarioService;
 @ViewScoped
 public class UsuarioMbean extends AbstractController {
 
+	public static final String FORM_VIEW = "/usuario/form";
+	
+	public static final String LISTA_VIEW = "/usuario/lista";
+	
 	private static final long serialVersionUID = 1L;
 	
 	private final transient UsuarioService usuarioService;
@@ -42,8 +46,8 @@ public class UsuarioMbean extends AbstractController {
 	public String salvar() {
 		try {
 		  usuarioService.salvar(usuario);
-		  adicionarMensagemInfo("Usuário salvo!");
-		  return "/menu?redirect-faces=true";	
+		  adicionarMensagemInfo("Usuário salvo com sucesso!");
+		  return forward(MenuMbean.MENU_VIEW);
 		} catch(NegocioException e) {
 			e.printStackTrace();
 			adicionarMensagemErro(e.getMessage());
@@ -54,7 +58,7 @@ public class UsuarioMbean extends AbstractController {
 	public String remover() {
 		try {
 			usuarioService.deleteById(usuario.getId());
-			adicionarMensagemInfo("Usuário removido!");
+			adicionarMensagemInfo("Usuário removido com sucesso!");
 		} catch(NegocioException e) {
 			 e.printStackTrace();
 			 adicionarMensagemErro(e.getMessage());
@@ -63,7 +67,7 @@ public class UsuarioMbean extends AbstractController {
 	}
 	
 	public String irParaAlterar() {
-	    return "/usuario/form?faces-redirect=true&id=" + usuario.getId();
+	    return forward(FORM_VIEW) + "&id=" + usuario.getId();
 	}
 	
 	public Usuario getUsuario() {

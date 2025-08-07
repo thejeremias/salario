@@ -25,6 +25,14 @@ public abstract class AbstractController implements Serializable {
 	public void adicionarMensagem(Severity severity, String resumo,  String mensagem) {
 		 FacesContext.getCurrentInstance().addMessage(null,
 	             new FacesMessage(severity, resumo, mensagem));
+		 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+	}
+	
+	/**
+	 * forward simplificado para fazer redirects.
+	 */
+	public String forward(String view) {
+		return view + "?faces-redirect=true";
 	}
 		
 }

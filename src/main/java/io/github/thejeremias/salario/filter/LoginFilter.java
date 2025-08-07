@@ -18,12 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginFilter implements Filter {
 
-	/**
-	 *  Não carrego recurso previamente ou configuração.
-	 */
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		throw new UnsupportedOperationException("Não utilizado.");
+		/**
+		 *  Não carrego recurso previamente ou configuração.
+		 */
 	}
 
     @Override
@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String url = httpRequest.getRequestURL().toString();
-        boolean recursoEstatico = url.contains("javax.faces.resource");
+        boolean recursoEstatico = url.contains("javax.faces.resource") || url.contains("/static/");
         boolean paginaLogin = url.contains("/login");
         Object usuario = httpRequest.getSession().getAttribute("usuario");
         if (usuario == null && !paginaLogin && !recursoEstatico) {
@@ -42,12 +42,12 @@ public class LoginFilter implements Filter {
         chain.doFilter(request, response);
     }
 
-	/**
-	 *  Não libero recurso.
-	 */
+	
 	@Override
 	public void destroy() {
-		throw new UnsupportedOperationException("Não utilizado.");
+		/**
+		 *  Não libero recursos.
+		 */
 	}
 
 }

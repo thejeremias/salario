@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -17,7 +19,7 @@
 		        <h:outputLabel for="usuario-login" value="Usuário" />
 		        <p:inputText id="usuario-login" value="#{loginMbean.loginDto.usuario}" />
 		        <h:outputLabel for="senha-login" value="Senha" />
-		        <p:inputText id="senha-login" value="#{loginMbean.loginDto.senha}" />
+		         <p:password id="senha-login" value="#{loginMbean.loginDto.senha}"/>
 		        <p:commandButton value="Entrar" action="#{loginMbean.entrar}" update="@form"/>
 		    </div>
 		</h:form>

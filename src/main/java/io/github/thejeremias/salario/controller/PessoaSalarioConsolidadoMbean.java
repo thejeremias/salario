@@ -1,9 +1,12 @@
 package io.github.thejeremias.salario.controller;
 
 
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.model.LazyDataModel;
@@ -15,11 +18,16 @@ import io.github.thejeremias.salario.dto.FiltroPessoaSalarioConsolidadoDto;
 import io.github.thejeremias.salario.exception.NegocioException;
 import io.github.thejeremias.salario.paginator.PessoaSalarioConsolidadoPaginator;
 import io.github.thejeremias.salario.service.PessoaSalarioConsolidadoService;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 
 @ManagedBean
 @ViewScoped
 public class PessoaSalarioConsolidadoMbean extends AbstractController {
+	
+	public static final String LISTA_VIEW = "pessoas_salarios_consolidados/lista";
 	
 	private static final long serialVersionUID = 1L;
 
@@ -64,10 +72,15 @@ public class PessoaSalarioConsolidadoMbean extends AbstractController {
 	
 	public String gerarRelatorio() {
 		try {		
-			pessoaSalarioConsolidadoService.gerarRelatorioPessoasSalariosConsolidados(filtroPessoaSalarioConsolidadoDto, (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
-					.getResponse());
+			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+			response.setContentType("application/pdf");
+			response.setHeader("Content-Disposition", "attachment; filename=\"relatorio_pessoas_salarios_consolidados.pdf\"");
+			JasperPrint jasperPrint = pessoaSalarioConsolidadoService.gerarRelatorioPessoasSalariosConsolidados(filtroPessoaSalarioConsolidadoDto);
+			try (ServletOutputStream out = response.getOutputStream()) {
+				JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+			}
 			FacesContext.getCurrentInstance().responseComplete();
-		} catch (NegocioException e) {
+		} catch (NegocioException | IOException | JRException e) {
 			e.printStackTrace();
 			adicionarMensagemErro(e.getMessage());
 		}

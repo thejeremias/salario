@@ -9,21 +9,22 @@ public class MenuMbean extends AbstractController {
 
 	private static final long serialVersionUID = 1L;
 	
+	public static final String MENU_VIEW = "/menu";
+	
 	public String irParaPessoaSalarioConsolidado() {
-		return "pessoas_salarios_consolidados/lista?faces-redirect=true";
+		return forward(PessoaSalarioConsolidadoMbean.LISTA_VIEW);
 	}
 	
 	public String irParaCadastroUsuario() {
-		return "usuario/form?faces-redirect=true";
+		return forward(UsuarioMbean.FORM_VIEW);
 	}
 	
 	public String irParaListarUsuario() {
-		return "usuario/lista?faces-redirect=true";
+		return forward(UsuarioMbean.LISTA_VIEW);
 	}
 	
-	
 	public String voltar() {
-		return "/menu?faces-redirect=true";
+		return forward(MENU_VIEW);
 	}
 	
 }

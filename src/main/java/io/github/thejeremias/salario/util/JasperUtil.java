@@ -1,6 +1,5 @@
 package io.github.thejeremias.salario.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -9,8 +8,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 
 import io.github.thejeremias.salario.dto.LinhaRelatorioDto;
 
@@ -24,17 +21,12 @@ public class JasperUtil {
 		throw new IllegalArgumentException("Classe utilitária");
 	}
 
-	public static void gerarRelatorio(List<LinhaRelatorioDto> dados, String caminho, String nomeArquivo, Map<String, Object> parametros, HttpServletResponse response) throws JRException, IOException  {
+	public static JasperPrint gerarRelatorio(List<LinhaRelatorioDto> dados, String caminho, Map<String, Object> parametros) throws JRException  {
 		InputStream inputStream = JasperUtil.class.getResourceAsStream(caminho);
 		if (inputStream == null) {
 			throw new IllegalArgumentException("Arquivo não encontrado.");
 		}
-		JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parametros, new JRBeanCollectionDataSource(dados));
-		response.setContentType("application/pdf");
-		response.setHeader("Content-disposition", "attachment; filename=" + nomeArquivo + ".pdf");
-		try (ServletOutputStream out = response.getOutputStream()) {
-			JasperExportManager.exportReportToPdfStream(jasperPrint, out);
-		}
+		return JasperFillManager.fillReport(inputStream, parametros, new JRBeanCollectionDataSource(dados));
 	}
     
 }
