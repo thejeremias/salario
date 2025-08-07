@@ -66,6 +66,7 @@ public class GenericDaoImpl<T extends PersistEntity> implements GenericDao<T> {
 		  }
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAllPaginado(int first, int pageSize) {
 		String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";

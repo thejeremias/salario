@@ -1,6 +1,6 @@
 package io.github.thejeremias.salario.dto;
 
-public class LinhaRelatorio {
+public class LinhaRelatorioDto {
 	
 	private String nomePessoa;
 	
@@ -8,15 +8,15 @@ public class LinhaRelatorio {
 	
 	private String salario;
 
-	public LinhaRelatorio() {}
+	public LinhaRelatorioDto() {}
 	
-	public LinhaRelatorio(String nomePessoa, String nomeCargo, Double salario) {
+	public LinhaRelatorioDto(String nomePessoa, String nomeCargo, Double salario) {
 		this.nomePessoa = nomePessoa;
 		this.nomeCargo = nomeCargo;
 		this.salario = "R$ " + salario;
 	}
 	
-	public LinhaRelatorio(String nomePessoa, String nomeCargo, String salario) {
+	public LinhaRelatorioDto(String nomePessoa, String nomeCargo, String salario) {
 		this.nomePessoa = nomePessoa;
 		this.nomeCargo = nomeCargo;
 		this.salario = salario;

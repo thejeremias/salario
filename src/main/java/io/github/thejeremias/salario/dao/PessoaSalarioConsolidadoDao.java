@@ -10,7 +10,7 @@ import javax.persistence.Query;
 
 import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
 import io.github.thejeremias.salario.dto.FiltroPessoaSalarioConsolidadoDto;
-import io.github.thejeremias.salario.dto.LinhaRelatorio;
+import io.github.thejeremias.salario.dto.LinhaRelatorioDto;
 import io.github.thejeremias.salario.exception.DaoException;
 
 public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioConsolidado>{
@@ -46,6 +46,7 @@ public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioCon
 		}    
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<PessoaSalarioConsolidado> findAllPaginadoProjetado(int first, int pageSize) {
 		String jpql = "SELECT new PessoaSalarioConsolidado(psc.id, psc.nomePessoa, psc.nomeCargo, psc.salario) FROM PessoaSalarioConsolidado psc"
 				+ " order by psc.nomePessoa";
@@ -56,6 +57,7 @@ public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioCon
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public List<PessoaSalarioConsolidado> filterPaginadoProjetado(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
 		StringBuilder jpql = new StringBuilder("SELECT new PessoaSalarioConsolidado(psc.id, psc.nomePessoa, psc.nomeCargo, psc.salario) FROM PessoaSalarioConsolidado psc WHERE 1=1");
 		Map<String, Object> filtros = new HashMap<>();
@@ -73,7 +75,8 @@ public class PessoaSalarioConsolidadoDao extends GenericDaoImpl<PessoaSalarioCon
 		return query.getResultList();
 	}
 	
-	public List<LinhaRelatorio> filterPaginadoProjetadoRelatorio(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
+	@SuppressWarnings("unchecked")
+	public List<LinhaRelatorioDto> filterPaginadoProjetadoRelatorio(FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto) {
 		StringBuilder jpql = new StringBuilder("SELECT new io.github.thejeremias.salario.dto.LinhaRelatorio(psc.nomePessoa, psc.nomeCargo, psc.salario) FROM PessoaSalarioConsolidado psc WHERE 1=1");
 		Map<String, Object> filtros = new HashMap<>();
 		if (filtroPessoaSalarioConsolidadoDto.getNome() != null && !filtroPessoaSalarioConsolidadoDto.getNome().trim().isEmpty()) {

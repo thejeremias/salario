@@ -21,11 +21,18 @@ public class UsuarioService {
 	}
 	
 	public void autenticar(LoginDto loginDto, HttpSession session) throws NegocioException {
-		Usuario usuarioBd = usuarioDao.findByNome(loginDto.getUsuario());
-		if (usuarioBd == null || !PasswordUtil.checkPassword(loginDto.getSenha(), usuarioBd.getSenha())) {
-			throw new NegocioException("Credencial inválida.");
+		try {
+			Usuario usuarioBd = usuarioDao.findByNome(loginDto.getUsuario());
+			if (usuarioBd == null || !PasswordUtil.checkPassword(loginDto.getSenha(), usuarioBd.getSenha())) {
+				throw new NegocioException("Credencial inválida.");
+			}
+			session.setAttribute("usuario", usuarioBd);
+		} catch(DaoException e) {
+			if (e.isRegistroNaoEncontrado()) {
+				throw new NegocioException("Usuário não encontrado.", e);
+			}
+			throw new NegocioException("Erro ao buscar usuário.", e);
 		}
-		session.setAttribute("usuario", usuarioBd);
 	}
 
 	public void salvar(Usuario usuario) throws NegocioException {

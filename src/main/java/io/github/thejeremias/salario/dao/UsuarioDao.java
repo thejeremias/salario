@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import io.github.thejeremias.salario.domain.Usuario;
 import io.github.thejeremias.salario.dto.FiltroUsuarioDto;
+import io.github.thejeremias.salario.exception.DaoException;
 
 public class UsuarioDao extends GenericDaoImpl<Usuario> {
 
@@ -16,12 +18,17 @@ public class UsuarioDao extends GenericDaoImpl<Usuario> {
 		super(Usuario.class);
 	}
 	
-	public Usuario findByNome(String nome) {
+	public Usuario findByNome(String nome) throws DaoException {
 		String jpql = "SELECT u FROM Usuario u join u.pessoa p WHERE p.usuario = :nome";
-        return entityManager.createQuery(jpql, Usuario.class).setParameter("nome", nome).getSingleResult();
+		try {
+			return entityManager.createQuery(jpql, Usuario.class).setParameter("nome", nome).getSingleResult();
+		} catch(NoResultException e) {
+			throw new DaoException(DaoException.REGISTRO_NAO_ENCONTRADO, e);
+		}
 	}
 
 
+	@SuppressWarnings("unchecked")
 	public List<Usuario> filterPaginadoProjetado(FiltroUsuarioDto filtroUsuarioDto) {
 		StringBuilder jpql = new StringBuilder("SELECT new Usuario(u.id, p.nome, p.usuario) FROM Usuario u JOIN u.pessoa p WHERE 1=1");
 		Map<String, Object> filtros = new HashMap<>();
@@ -60,7 +67,5 @@ public class UsuarioDao extends GenericDaoImpl<Usuario> {
 		}
 		return ((Long) query.getSingleResult()).intValue();
 	}
-	
-
 	
 }

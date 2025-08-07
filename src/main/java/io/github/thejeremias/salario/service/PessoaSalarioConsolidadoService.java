@@ -1,7 +1,6 @@
 package io.github.thejeremias.salario.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import io.github.thejeremias.salario.dao.PessoaSalarioConsolidadoDao;
 import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
 import io.github.thejeremias.salario.dto.FiltroPessoaSalarioConsolidadoDto;
-import io.github.thejeremias.salario.dto.LinhaRelatorio;
 import io.github.thejeremias.salario.exception.DaoException;
 import io.github.thejeremias.salario.exception.NegocioException;
 import io.github.thejeremias.salario.util.JasperUtil;

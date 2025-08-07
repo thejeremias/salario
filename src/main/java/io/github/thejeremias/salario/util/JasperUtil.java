@@ -12,8 +12,7 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import io.github.thejeremias.salario.domain.PessoaSalarioConsolidado;
-import io.github.thejeremias.salario.dto.LinhaRelatorio;
+import io.github.thejeremias.salario.dto.LinhaRelatorioDto;
 
 /**
  *  Classe utilitária para gerar um relatório JasperReport.
@@ -25,7 +24,7 @@ public class JasperUtil {
 		throw new IllegalArgumentException("Classe utilitária");
 	}
 
-	public static void gerarRelatorio(List<LinhaRelatorio> dados, String caminho, String nomeArquivo, Map<String, Object> parametros, HttpServletResponse response) throws JRException, IOException  {
+	public static void gerarRelatorio(List<LinhaRelatorioDto> dados, String caminho, String nomeArquivo, Map<String, Object> parametros, HttpServletResponse response) throws JRException, IOException  {
 		InputStream inputStream = JasperUtil.class.getResourceAsStream(caminho);
 		if (inputStream == null) {
 			throw new IllegalArgumentException("Arquivo não encontrado.");
