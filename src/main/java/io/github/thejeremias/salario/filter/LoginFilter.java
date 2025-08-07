@@ -18,8 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginFilter implements Filter {
 
+	/**
+	 *  Não carrego recurso previamente ou configuração.
+	 */
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {}
+	public void init(FilterConfig filterConfig) throws ServletException {
+		throw new UnsupportedOperationException("Não utilizado.");
+	}
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -37,7 +42,12 @@ public class LoginFilter implements Filter {
         chain.doFilter(request, response);
     }
 
+	/**
+	 *  Não libero recurso.
+	 */
 	@Override
-	public void destroy() {}
+	public void destroy() {
+		throw new UnsupportedOperationException("Não utilizado.");
+	}
 
 }

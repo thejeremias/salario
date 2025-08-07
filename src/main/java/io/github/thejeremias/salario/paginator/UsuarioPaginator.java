@@ -15,7 +15,7 @@ public class UsuarioPaginator extends LazyDataModel<Usuario> {
 
 	private static final long serialVersionUID = 1L;
 	
-	private UsuarioService usuarioService;
+	private transient UsuarioService usuarioService;
 	
 	private FiltroUsuarioDto filtroUsuarioDto;
 	

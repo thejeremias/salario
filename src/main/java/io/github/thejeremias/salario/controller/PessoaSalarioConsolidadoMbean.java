@@ -23,11 +23,11 @@ public class PessoaSalarioConsolidadoMbean extends AbstractController {
 	
 	private static final long serialVersionUID = 1L;
 
-	private PessoaSalarioConsolidadoService pessoaSalarioConsolidadoService;
+	private transient PessoaSalarioConsolidadoService pessoaSalarioConsolidadoService;
 		
 	private LazyDataModel<PessoaSalarioConsolidado> lazyModel;
 	
-	private Boolean assincrono;
+	private boolean assincrono;
 	
 	private FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto;
 	
@@ -82,11 +82,11 @@ public class PessoaSalarioConsolidadoMbean extends AbstractController {
 		this.lazyModel = lazyModel;
 	}
 
-	public Boolean getAssincrono() {
+	public boolean getAssincrono() {
 		return assincrono;
 	}
 
-	public void setAssincrono(Boolean assincrono) {
+	public void setAssincrono(boolean assincrono) {
 		this.assincrono = assincrono;
 	}
 

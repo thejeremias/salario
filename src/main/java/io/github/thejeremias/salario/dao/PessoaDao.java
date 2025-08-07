@@ -20,7 +20,7 @@ public class PessoaDao extends GenericDaoImpl<Pessoa> {
 		List<Pessoa> pessoasSemUsuario = new ArrayList<>();
 		for (Object[] linha : resultSet) {
 			int i = 0;
-			pessoasSemUsuario.add(new Pessoa(((BigInteger) linha[i++]).longValue(), (String) linha[i++], (String) linha[i++]));
+			pessoasSemUsuario.add(new Pessoa(((BigInteger) linha[i++]).longValue(), (String) linha[i++], (String) linha[i]));
 		}
 		return pessoasSemUsuario;
 	}

@@ -11,7 +11,7 @@ import io.github.thejeremias.salario.persistence.EntityManagerFactorySingleton;
 
 public class GenericDaoImpl<T extends PersistEntity> implements GenericDao<T> {
 
-    private final Class<T> entityClass;
+	private final Class<T> entityClass;
 	
 	protected EntityManager entityManager;
 	
@@ -79,7 +79,7 @@ public class GenericDaoImpl<T extends PersistEntity> implements GenericDao<T> {
 	@Override
 	public int countAll() {
 		String jpql = "SELECT count(e) FROM " + entityClass.getSimpleName() + " e";
-		return ((Long) entityManager.createQuery(jpql, Long.class).getSingleResult()).intValue();
+		return (entityManager.createQuery(jpql, Long.class).getSingleResult()).intValue();
 	}
 	
 }

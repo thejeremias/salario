@@ -15,7 +15,7 @@ public class PessoaSalarioConsolidadoPaginator extends LazyDataModel<PessoaSalar
 
 	private static final long serialVersionUID = 1L;
 	
-	private PessoaSalarioConsolidadoService pessoaSalarioConsolidadoService;
+	private transient PessoaSalarioConsolidadoService pessoaSalarioConsolidadoService;
 	
 	private FiltroPessoaSalarioConsolidadoDto filtroPessoaSalarioConsolidadoDto;
 	

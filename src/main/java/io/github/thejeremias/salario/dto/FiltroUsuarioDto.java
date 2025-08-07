@@ -1,7 +1,11 @@
 package io.github.thejeremias.salario.dto;
 
-public class FiltroUsuarioDto {
+import java.io.Serializable;
+
+public class FiltroUsuarioDto implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private String login;
 	
 	private String nomePessoa;

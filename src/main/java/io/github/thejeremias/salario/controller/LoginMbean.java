@@ -17,7 +17,7 @@ public class LoginMbean extends AbstractController {
 	
 	private LoginDto loginDto;
 	
-	private final UsuarioService usuarioService; 
+	private final transient UsuarioService usuarioService; 
 	
 	public LoginMbean() {
 		this.loginDto = new LoginDto();

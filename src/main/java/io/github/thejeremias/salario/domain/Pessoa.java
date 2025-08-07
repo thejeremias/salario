@@ -61,21 +61,6 @@ public class Pessoa implements PersistEntity {
 		this.usuario = usuario;
 	}
 	
-	public Pessoa(Long id, String nome, String cidade, String email, String cep, String endereco, String pais,
-			String usuario, String telefone, Date dataNascimento, Cargo cargo, String senha) {
-		this.id = id;
-		this.nome = nome;
-		this.cidade = cidade;
-		this.email = email;
-		this.cep = cep;
-		this.endereco = endereco;
-		this.pais = pais;
-		this.usuario = usuario;
-		this.dataNascimento = dataNascimento;
-		this.cargo = cargo;
-		this.senha = senha;
-	}
-
 	@Override
 	public Long getId() {
 		return id;

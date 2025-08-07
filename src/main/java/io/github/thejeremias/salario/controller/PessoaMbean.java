@@ -16,7 +16,7 @@ public class PessoaMbean extends AbstractController {
 
 	private static final long serialVersionUID = 1L;
 
-	private final PessoaService pessoaService;
+	private final transient PessoaService pessoaService;
 
 	public PessoaMbean() {
 		pessoaService = new PessoaService();

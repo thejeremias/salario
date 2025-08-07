@@ -6,6 +6,8 @@ import javax.persistence.Persistence;
 
 public class EntityManagerFactorySingleton {
 	
+	private EntityManagerFactorySingleton() {}
+	
 	private static final String NOME_BD = "salario";
 	
 	private static EntityManagerFactory factory = null;

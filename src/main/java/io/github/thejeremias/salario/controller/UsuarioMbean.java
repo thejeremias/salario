@@ -20,7 +20,7 @@ public class UsuarioMbean extends AbstractController {
 
 	private static final long serialVersionUID = 1L;
 	
-	private final UsuarioService usuarioService;
+	private final transient UsuarioService usuarioService;
 	
 	private Usuario usuario;
 	
