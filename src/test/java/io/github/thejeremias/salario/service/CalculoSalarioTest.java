@@ -16,7 +16,7 @@ import io.github.thejeremias.salario.domain.Vencimento;
  */
 public class CalculoSalarioTest {
 
-	List<Vencimento> vencimentosAnalista;
+	private List<Vencimento> vencimentosAnalista;
 	
 	@Before
 	public void setUp() {

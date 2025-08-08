@@ -46,8 +46,6 @@ public class Pessoa implements PersistEntity {
 	@ManyToOne
 	@JoinColumn(name = "id_cargo")
 	private Cargo cargo;
-
-	private String senha;
 	
 	public Pessoa() {}
 	
@@ -151,12 +149,4 @@ public class Pessoa implements PersistEntity {
 		this.cargo = cargo;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
 }
